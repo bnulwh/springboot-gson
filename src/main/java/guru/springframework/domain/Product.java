@@ -1,27 +1,33 @@
 package guru.springframework.domain;
 
+import com.google.gson.annotations.Expose;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @ApiModelProperty(notes = "The database generated product ID")
     private Integer id;
+
     @Version
-    @ApiModelProperty(notes = "The auto-generated version of the product")
-    private Integer version;
-    @ApiModelProperty(notes = "The application-specific product ID")
+    private transient Integer version;
+
+    @Expose(serialize = false)
     private String productId;
-    @ApiModelProperty(notes = "The product description")
+
+    @Expose
     private String description;
-    @ApiModelProperty(notes = "The image URL of the product")
+
     private String imageUrl;
-    @ApiModelProperty(notes = "The price of the product", required = true)
+
     private BigDecimal price;
+
+    @Expose
+    private Date developedDate;
 
     public String getDescription() {
         return description;
@@ -70,4 +76,8 @@ public class Product {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public Date getDevelopedDate() { return developedDate; }
+
+    public void setDevelopedDate(Date developedDate) { this.developedDate = developedDate; }
 }
