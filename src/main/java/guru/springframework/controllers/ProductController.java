@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.Date;
 
 import guru.springframework.domain.Product;
+import guru.springframework.serialize.CustomProductSerializer;
 import guru.springframework.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,16 +38,26 @@ public class ProductController {
     @RequestMapping(value = "/show/{id}", method= RequestMethod.GET, produces = "application/json")
     public Product showProduct(@PathVariable Integer id, Model model){
        Product product = productService.getProductById(id);
+       /*Simple serializing of product object into json without pretty printing*/
        /*Gson gson = new Gson();
        String json = gson.toJson(product);
        System.out.println(json);*/
-       GsonBuilder gsonBuilder = new GsonBuilder();
+
+       /*GsonBuilder for @Expose annotation*/
+       /*GsonBuilder gsonBuilder = new GsonBuilder();
        gsonBuilder.excludeFieldsWithoutExposeAnnotation().setPrettyPrinting();
-       Gson gson = gsonBuilder.create();
+       Gson gson = gsonBuilder.create();*/
+
+       /*GsonBuilder for pretty printing of Json during serializing of product object*/
        //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        /*Custom serialization of product object*/
+       GsonBuilder gsonBuilder = new GsonBuilder();
+       gsonBuilder.registerTypeAdapter(Product.class, new CustomProductSerializer());
+       gsonBuilder.setPrettyPrinting();
+       Gson gson = gsonBuilder.create();
        String json = gson.toJson(product);
        System.out.println(json);
-       System.out.println(new Date());
        return product;
     }
 

@@ -13,6 +13,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Expose
     @Version
     private transient Integer version;
 
@@ -22,12 +23,14 @@ public class Product {
     @Expose
     private String description;
 
+    @Expose
     private String imageUrl;
 
+    @Expose
     private BigDecimal price;
 
-    @Expose
-    private Date developedDate;
+    /*@Expose
+    private Date developedDate;*/
 
     public String getDescription() {
         return description;
@@ -77,7 +80,7 @@ public class Product {
         this.price = price;
     }
 
-    public Date getDevelopedDate() { return developedDate; }
+    /*public Date getDevelopedDate() { return developedDate; }
 
-    public void setDevelopedDate(Date developedDate) { this.developedDate = developedDate; }
+    public void setDevelopedDate(Date developedDate) { this.developedDate = developedDate; }*/
 }
