@@ -12,6 +12,7 @@ public class CustomProductSerializer implements JsonSerializer<Product> {
     @Override
     public JsonElement serialize(Product product, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("id", product.getId());
         jsonObject.addProperty("version", product.getVersion());
         jsonObject.addProperty("product-id", product.getProductId());
         jsonObject.addProperty("description", product.getDescription());

@@ -9,11 +9,12 @@ import java.util.Date;
 
 @Entity
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Expose
     private Integer id;
 
-    @Expose
     @Version
     private transient Integer version;
 
@@ -28,9 +29,6 @@ public class Product {
 
     @Expose
     private BigDecimal price;
-
-    /*@Expose
-    private Date developedDate;*/
 
     public String getDescription() {
         return description;
@@ -80,7 +78,4 @@ public class Product {
         this.price = price;
     }
 
-    /*public Date getDevelopedDate() { return developedDate; }
-
-    public void setDevelopedDate(Date developedDate) { this.developedDate = developedDate; }*/
 }
