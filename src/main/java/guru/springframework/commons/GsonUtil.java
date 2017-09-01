@@ -48,7 +48,7 @@ public class GsonUtil {
         return json;
     }
 
-    /*Custom deseialization of given JSON*/
+    /*Custom deserialization of given JSON*/
     public String objectWithCustomDeserialization() throws Exception{
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Product.class, new CustomProductDeserializer());
